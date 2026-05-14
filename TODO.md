@@ -28,9 +28,20 @@
 - [ ] Running over these operations many times 
 
 
-
 - [ ] Generate MVT with python 
 - [ ] Python scripted pipeline to run multiple operations 
 - [ ] 
+
+
+
+---
+### NOTES
+```bash
+docker info
+# list running containers and basic details 
+docker ps 
+# start docker docker daemon
+docker desktop start
+ ```
 
 
