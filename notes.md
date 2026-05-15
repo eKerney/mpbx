@@ -34,8 +34,17 @@ ogrinfo boundaries.gpkg -so postcodes # layer summary
 ogrinfo boundaries.gpkg postcodes -limit 5 # actual data 
 ogrinfo boundaries.gpkg -al -so #spatial extent and CRS
 -so # summary only 
+-al # all layers
 
+# this works wirth sudo ќ
+sudo ogrinfo boundaries_coding_interview_data.gpkg -q -al -sql "SELECT count(*) FROM postcodes"
 
+# loading into postgres 
+
+# one liner works better  
+ogr2ogr -f "PostgreSQL" PG:"dbname=mydb user=admin host=localhost port=5432 password=password" boundaries_coding_interview_data.gpkg postcodes -nln public.boundaries -lco GEOMETRY_NAME=geom
+
+-lco # layer creation option
 
 ```
 
@@ -45,6 +54,14 @@ ogrinfo boundaries.gpkg -al -so #spatial extent and CRS
 
 - Schema = directory/folder
 - Table = a file inside that directory
+
+ogr2ogr                                    ← "I want to convert data"
+  -f "PostgreSQL"                           ← "Output format = Postgres"
+  PG:"dbname=mydb user=admin ..."           ← "Destination = my PostGIS db" 
+  boundaries_coding_interview_data.gpkg     ← "Source file"
+  -nln public.aoi                           ← "Call the new table 'aoi'"
+
+The pattern is always: tool → format → where to put it → what file → what to call it
 
 ---
 
