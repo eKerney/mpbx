@@ -30,8 +30,6 @@
 
 - [ ] Generate MVT with python 
 - [ ] Python scripted pipeline to run multiple operations 
-- [ ] 
-
 
 
 ---
@@ -64,7 +62,7 @@ sudo docker run -it my-image-name
 ```
 
 **Flag	Purpose**
--it	            Interactive + TTY (keep it alive)
+it	            Interactive + TTY (keep it alive)
 -d	            Detached (background)
 --name my-cont	Assign a name
 -p 8080:80	    Port mapping (host:container)
@@ -72,5 +70,15 @@ sudo docker run -it my-image-name
 --rm	        Auto-remove container on exit
 
 >Quick one-liner (build + run):
-sudo docker build -t my-image . && sudo docker run -it --rm my-image
+`sudo docker build -t my-image . && sudo docker run -it --rm my-image`
 
+4. Full Postgres container command
+```bash
+docker run -d \
+  --name pg-container \
+  -p 5432:5432 \
+  -e POSTGRES_USER=admin \
+  -e POSTGRES_PASSWORD=password \
+  -e POSTGRES_DB=mydb \
+  postgis/postgis:17-3.5
+```
