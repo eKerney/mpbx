@@ -36,12 +36,41 @@
 
 ---
 ### NOTES
+
 ```bash
 docker info
-# list running containers and basic details 
-docker ps 
-# start docker docker daemon
-docker desktop start
+docker ps # list running containers and basic details 
+docker ps -a #list all available containers 
+docker desktop start # start docker docker daemon
+docker start aacb8922f8f9 # start docker container 
  ```
 
+1. Create a Dockerfile in your project root (example):
+
+```Dockerfile 
+FROM ubuntu:22.04
+RUN apt-get update && apt-get install -y curl
+COPY . /app
+WORKDIR /app
+CMD ["bash"]
+```
+
+2. Build the image:
+`sudo docker build -t my-image-name .`
+
+3. Run a container from the image:
+```bash
+sudo docker run -it my-image-name
+```
+
+**Flag	Purpose**
+-it	            Interactive + TTY (keep it alive)
+-d	            Detached (background)
+--name my-cont	Assign a name
+-p 8080:80	    Port mapping (host:container)
+-v $(pwd):/app	Mount current directory
+--rm	        Auto-remove container on exit
+
+>Quick one-liner (build + run):
+sudo docker build -t my-image . && sudo docker run -it --rm my-image
 
