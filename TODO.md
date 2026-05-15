@@ -1,14 +1,14 @@
 > INSTALLS
-- [ ] psql install and test 
-- [ ] Docker - start from CLI 
-- [ ] Docker - run dockerfile 
+- [x] psql install and test 
+- [x] Docker - start from CLI 
+- [x] Docker - run dockerfile 
 - [ ] ogr2ogr - install and test with boundaries 
-- [ ] Docker CLI explore
+- [x] Docker CLI explore
 
 > SETUP 
-- [ ] Start instance 
+- [x] Start instance 
 - [ ] Load boundaries data via psql 
-- [ ] Connect DB to QGIS - load data and inspect 
+- [x] Connect DB to QGIS - load data and inspect 
 - [ ] Look for issues with the data 
 - [ ] Bonus: connect to DB in notebook, load query as GDB, explore live 
 - [ ] Bonus: lonboard - much faster visualization - try to load as parquet 
@@ -81,4 +81,5 @@ docker run -d \
   -e POSTGRES_PASSWORD=password \
   -e POSTGRES_DB=mydb \
   postgis/postgis:17-3.5
+# had some trouble with this at first
 ```
