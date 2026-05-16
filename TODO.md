@@ -2,17 +2,18 @@
 - [x] psql install and test 
 - [x] Docker - start from CLI 
 - [x] Docker - run dockerfile 
-- [ ] ogr2ogr - install and test with boundaries 
+- [x] ogr2ogr - install and test with boundaries 
 - [x] Docker CLI explore
 
 > SETUP 
 - [x] Start instance 
-- [ ] Load boundaries data via psql 
+- [x] Load boundaries data via psql 
 - [x] Connect DB to QGIS - load data and inspect 
 - [ ] Look for issues with the data 
 - [ ] Bonus: connect to DB in notebook, load query as GDB, explore live 
 - [ ] Bonus: lonboard - much faster visualization - try to load as parquet 
 - [ ] Bonus: Load additional Michigan data into PostGIS - Capitals? 
+- []
 
 > PSQL Section: 
 - [ ] Determine what cleaning should be performed 
