@@ -37,6 +37,11 @@ SELECT * FROM spatial_ref_sys LIMIT 5;  -- check PostGIS is working
 ### pgcli 
 pgcli -h localhost -U admin -d mydb 
 
+#### Connection string 
+postgresql://postgres:postgres@localhost:15432/postgres
+echo "SELECT * FROM public.boundaries LIMIT 5;" | psql postgresql://postgres:postgres@localhost:15432/postgres
+export DB_URL=postgresql://postgres:postgres@localhost:15432/postgres
+
 ### ogr2ogr
 sudo apt update && sudo apt install gdal-bin
 # GDAL version 3.4.1 - outdated version 

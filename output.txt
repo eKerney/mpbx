@@ -1,0 +1,5 @@
+ geometrytype | count 
+--------------+-------
+ MULTIPOLYGON | 25508
+(1 row)
+
