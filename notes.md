@@ -62,6 +62,25 @@ ogr2ogr -f "PostgreSQL" PG:"dbname=mydb user=admin host=localhost port=5432 pass
 
 -lco # layer creation option
 
+###  POSTGIS 
+SELECT COUNT(*) AS total_features FROM public.boundaries;
+#total_features=25508
+
+# column info 
+SELECT column_name, data_type, is_nullable FROM information_schema.columns WHERE table_name = 'boundaries';
+# get geom for all features 
+SELECT geometrytype(geom) FROM public.boundaries;
+# get count of geometry types 
+SELECT geometrytype(geom), COUNT(*) FROM public.boundaries GROUP BY geometrytype(geom) 
+
+SELECT DISTINCT postcode, COUNT(*) from public.boundaries GROUP BY postcode;
+
+# -- Check if geom is valid
+SELECT 
+    COUNT(*) AS total_features,
+    SUM(CASE WHEN ST_IsValid(geom) THEN 1 ELSE 0 END) AS valid_count,
+    SUM(CASE WHEN NOT ST_IsValid(geom) THEN 1 ELSE 0 END) AS invalid_count
+FROM your_table_name;
 ```
 
 ### QUESTIONS
