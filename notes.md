@@ -86,6 +86,11 @@ SELECT
     SUM(CASE WHEN ST_IsValid(geom) THEN 1 ELSE 0 END) AS valid_count,
     SUM(CASE WHEN NOT ST_IsValid(geom) THEN 1 ELSE 0 END) AS invalid_count
 FROM your_table_name;
+
+### vim hacks 
+
+# select range in sql file, pipe to psql 
+'<,'>w !psql $DB_URL > output.txt 2>&1
 ```
 
 ### QUESTIONS
