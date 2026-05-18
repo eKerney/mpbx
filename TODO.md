@@ -9,14 +9,14 @@
 - [x] Start instance 
 - [x] Load boundaries data via psql 
 - [x] Connect DB to QGIS - load data and inspect 
-- [ ] Look for issues with the data 
+- [x] Look for issues with the data 
 - [ ] Bonus: connect to DB in notebook, load query as GDB, explore live 
 - [ ] Bonus: lonboard - much faster visualization - try to load as parquet 
 - [ ] Bonus: Load additional Michigan data into PostGIS - Capitals? 
 
 > PSQL Section: 
-- [ ] Determine what cleaning should be performed 
-- [ ] Fix geometries 
+- [x] Determine what cleaning should be performed 
+- [x] Fix geometries 
 - [ ] ReProjection 
 - [ ] Simplify geometries 
 - [ ] Topology/edge matching (snap, coverage)
@@ -28,7 +28,9 @@
 - [ ] Running over these operations many times 
 
 
-- [ ] Generate MVT with python 
+- [ ] Generate MVT 
+- [ ] pg_tileserv 
+- [ ] pg_featureserv
 - [ ] Python scripted pipeline to run multiple operations 
 
 

@@ -29,4 +29,56 @@ SELECT
     WHEN NOT ST_IsValid(geom) THEN 1
   END) AS invalid_count
 FROM
-  public.boundaries;
+  public.cleaned_boundaries;
+-- reproject to 27700 British National Grid 
+SELECT
+  fid,
+  postcode,
+  structure,
+  postal1_id,
+  ST_SimplifyPreserveTopology(
+    ST_Transform(
+      geom,
+      27700
+    ),
+    -- British National Grid
+20-- tolerance in METERS (e.g. 20m)
+
+  ) AS geom
+FROM
+  cleaned_boundaries;
+-- your fixed table 
+DROP TABLE IF EXISTS simplified;
+CREATE TABLE simplified AS SELECT
+  fid,
+  postcode,
+  structure,
+  postal1_id,
+  ST_SimplifyPreserveTopology(
+    ST_Transform(
+      geom,
+      27700
+    ),
+    -- British National Grid
+20-- tolerance in METERS (e.g. 20m)
+
+  ) AS geom
+FROM
+  cleaned_boundaries;
+-- your fixed table 
+CREATE TABLE transform AS SELECT
+  fid,
+  postcode,
+  structure,
+  postal1_id,
+  ST_Transform(
+    geom,
+    27700
+  ) AS geom
+FROM
+  cleaned_boundaries;
+SELECT
+  ST_SRID(geom)
+FROM
+  transform
+LIMIT 1;

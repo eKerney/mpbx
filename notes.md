@@ -100,6 +100,9 @@ FROM your_table_name;
 - Schema = directory/folder
 - Table = a file inside that directory
 
+2. How to FIX Geometry IN PLACE! 
+
+
 ogr2ogr                                    ← "I want to convert data"
   -f "PostgreSQL"                           ← "Output format = Postgres"
   PG:"dbname=mydb user=admin ..."           ← "Destination = my PostGIS db" 
@@ -133,3 +136,9 @@ sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
 sudo apt-get update
 sudo apt-get install gdal-bin libgdal-dev python3-gdal
 ```
+
+**ST_SimplifyPreserveTopology:**
+Prevents features like holes or rings from collapsing or generating invalid self-intersections.
+**ST_SimplifyVW:** Utilizes the Visvalingam-Whyatt algorithm, which often delivers a cleaner aesthetic for complex polygons.
+**ST_CoverageSimplify**: Essential for adjacent borders (like country maps) because it prevents sliver gaps from forming between shared polygon edges.
+You could use a Europe-focused Equal Area projection like EPSG:3035 (ETRS89 / LAEA Europe), but for pure UK data, EPSG:27700 is generally preferred and more accurate.

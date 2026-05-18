@@ -1,5 +1,5 @@
- total_features | valid_count | invalid_count 
-----------------+-------------+---------------
-          25508 |       25508 |              
+ st_srid 
+---------
+   27700
 (1 row)
 
