@@ -59,7 +59,7 @@ CREATE TABLE simplified AS SELECT
   postal1_id,
   ST_SimplifyPreserveTopology(
     geom,
-    20
+    0.0001
   ) AS geom
 FROM
   british_boundaries;
@@ -101,8 +101,40 @@ CREATE TABLE bristol_proj AS SELECT
   ) AS geom
 FROM
   bristol_museums;
+--
+--
 SELECT
   ST_SRID(geom) AS my_srid
 FROM
   bristol_proj
 LIMIT 1;
+-- 
+-- topology 
+DROP TABLE IF EXISTS cleaned_topology;
+CREATE TABLE cleaned_topology AS SELECT
+  fid,
+  postcode,
+  structure,
+  postal1_id,
+  ST_CoverageClean(geom) AS geom-- Best modern function
+
+FROM
+  simplified;
+-- 
+-- 
+DROP TABLE IF EXISTS simplified_clean;
+CREATE TABLE simplified_clean AS SELECT
+  fid,
+  postcode,
+  structure,
+  postal1_id,
+  ST_MakeValid(ST_SimplifyPreserveTopology(
+    ST_Transform(
+      geom,
+      27700
+    ),
+    20
+  )) AS geom
+FROM
+  simplified;
+-- your previous table
