@@ -138,3 +138,20 @@ CREATE TABLE simplified_clean AS SELECT
 FROM
   simplified;
 -- your previous table
+SELECT
+  pg_terminate_backend(pid)
+FROM
+  pg_stat_activity
+WHERE
+  pid IN(
+    SELECT
+      activity.pid
+    FROM
+      pg_stat_activity activity
+    JOIN pg_locks lock
+      ON activity.pid = lock.pid
+    WHERE
+      lock.relation = 'public.british_boundaries' ::REGCLASS
+  );
+DROP TABLE IF EXISTS public.british_boundaries CASCADE;
+\dt

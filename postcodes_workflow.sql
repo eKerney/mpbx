@@ -1,13 +1,6 @@
 -- Load data into postgres 
 --
 -- clear all old tables 
-DROP TABLE IF EXISTS proj_boundaries,
-cleaned_boundaries,
-simplified,
-simplified_clean,
-transform,
-your_table,
-british_boundaries;
 -- Check Geom ST_IsValid() 
 SELECT
   COUNT(*) AS total_features,
@@ -20,16 +13,30 @@ SELECT
 FROM
   public.boundaries;
 --
--- Fix Geom ST_MakeValid() 
+-- NEW FIX GEOM SECTION 
 DROP TABLE IF EXISTS cleaned_boundaries;
 CREATE TABLE cleaned_boundaries AS SELECT
   fid,
   postcode,
   structure,
   postal1_id,
-  ST_MakeValid(geom) AS geom
+  ST_Multi(ST_CollectionExtract(
+    ST_MakeValid(geom),
+    3
+  )-- 3 = Polygon/MultiPolygon
+) AS geom
 FROM
   public.boundaries;
+-- register key for QGIS
+ALTER TABLE cleaned_boundaries ADD PRIMARY KEY(fid);
+SELECT
+  Populate_Geometry_Columns(
+    'public.cleaned_boundaries'::REGCLASS,
+    TRUE
+  );
+CREATE INDEX idx_cleaned_boundaries_geom
+ON cleaned_boundaries USING GIST(geom);
+--
 --
 -- ReCheck Geom ST_IsValid() 
 SELECT

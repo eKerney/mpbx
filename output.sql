@@ -1,9 +1,3 @@
-NOTICE:  table "proj_boundaries" does not exist, skipping
-NOTICE:  table "cleaned_boundaries" does not exist, skipping
-NOTICE:  table "simplified" does not exist, skipping
-NOTICE:  table "simplified_clean" does not exist, skipping
-NOTICE:  table "transform" does not exist, skipping
-NOTICE:  table "your_table" does not exist, skipping
 
 NOTICE:  Self-intersection at or near point -2.6867262511797207 51.516616739103277
 NOTICE:  Self-intersection at or near point -2.6867262511797207 51.516616739103277
@@ -60,9 +54,9 @@ NOTICE:  Self-intersection at or near point -2.6009691416718645 51.4569700265033
 
 
 
-NOTICE:  table "cleaned_boundaries" does not exist, skipping
 DROP TABLE
 SELECT 25508
+
 
  total_features | valid_count | invalid_count 
 ----------------+-------------+---------------
@@ -70,9 +64,9 @@ SELECT 25508
 (1 row)
 
 
-NOTICE:  table "proj_boundaries" does not exist, skipping
 DROP TABLE
 SELECT 25508
+
 
 
  srid  
@@ -80,8 +74,20 @@ SELECT 25508
  27700
 (1 row)
 
+ALTER TABLE
+WARNING:  Could not convert 'geom' in 'public.cleaned_boundaries' to use typmod with srid 4326, type MultiPolygon: Geometry type (GeometryCollection) does not match column type (MultiPolygon)
+ populate_geometry_columns 
+---------------------------
+                         0
+                        
 
 
-NOTICE:  table "simp_boundaries" does not exist, skipping
 DROP TABLE
 SELECT 25508
+ALTER TABLE
+ populate_geometry_columns 
+---------------------------
+                         1
+(1 row)
+
+CREATE INDEX

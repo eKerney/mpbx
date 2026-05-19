@@ -1,0 +1,70 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "SS Great Britain Museum"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -2.609043,
+                    51.449129
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Arnolfini"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -2.597295,
+                    51.449304
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "We The Curious"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -2.600531,
+                    51.450412
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Bristol City Museum"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -2.605106,
+                    51.456538
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Clifton Suspension Bridge Museum"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -2.63076,
+                    51.453905
+                ]
+            }
+        }
+    ]
+}
