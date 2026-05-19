@@ -63,6 +63,15 @@ CREATE TABLE proj_boundaries AS SELECT
   ) AS geom
 FROM
   cleaned_boundaries;
+-- Setup table for QGIS
+ALTER TABLE proj_boundaries ADD PRIMARY KEY(fid);
+SELECT
+  Populate_Geometry_Columns(
+    'public.proj_boundaries'::REGCLASS,
+    TRUE
+  );
+CREATE INDEX idx_proj_boundaries_geom
+ON proj_boundaries USING GIST(geom);
 --
 -- SELECT ST_SRID() to find CRS 
 SELECT
@@ -78,23 +87,49 @@ CREATE TABLE simp_boundaries AS SELECT
   postcode,
   structure,
   postal1_id,
-  ST_SimplifyPreserveTopology(
-    geom,
-    0.00001
-  ) AS geom
+  ST_Multi(ST_CollectionExtract(
+    ST_SimplifyPreserveTopology(
+      geom,
+      0.001
+    ),
+    3
+  )) AS geom
 FROM
   proj_boundaries;
+ALTER TABLE simp_boundaries ADD PRIMARY KEY(fid);
+SELECT
+  Populate_Geometry_Columns(
+    'public.simp_boundaries'::REGCLASS,
+    TRUE
+  );
+CREATE INDEX idx_simp_boundaries_geom
+ON simp_boundaries USING GIST(geom);
 --
--- Topology ST_CoverageClean 
+-- Topology 
 DROP TABLE IF EXISTS cleaned_boundaries;
 CREATE TABLE cleaned_boundaries AS SELECT
   fid,
   postcode,
   structure,
   postal1_id,
-  ST_CoverageClean(geom) AS geom
+  ST_Multi(ST_CollectionExtract(
+    ST_SnapToGrid(
+      geom,
+      0.005
+    ),
+    -- 5mm 
+3
+  )) AS geom
 FROM
   simp_boundaries;
+ALTER TABLE cleaned_boundaries ADD PRIMARY KEY(fid);
+SELECT
+  Populate_Geometry_Columns(
+    'public.cleaned_boundaries'::REGCLASS,
+    TRUE
+  );
+CREATE INDEX idx_cleaned_boundaries_geom
+ON cleaned_boundaries USING GIST(geom);
 -- Remove Slivers 
 -- Final Validation & Index 
 -- pg_tileserv - generate MVTs 
