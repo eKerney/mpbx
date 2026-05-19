@@ -65,7 +65,8 @@ ogr2ogr -f "PostgreSQL" PG:"dbname=postgres user=postgres host=localhost port=15
 # one liner works better  
 ogr2ogr -f "PostgreSQL" PG:"dbname=mydb user=admin host=localhost port=5432 password=password" boundaries_coding_interview_data.gpkg postcodes -nln public.boundaries -lco GEOMETRY_NAME=geom
 
--lco # layer creation option
+-nln	New Layer Name	Name of the output table in PostGIS (e.g., -nln public.boundaries)
+-lco	Layer Creation Option	Controls how the output table is created (e.g., -lco GEOMETRY_NAME=geom renames the geometry column)
 
 ###  POSTGIS 
 SELECT COUNT(*) AS total_features FROM public.boundaries;
@@ -101,6 +102,8 @@ FROM your_table_name;
 - Table = a file inside that directory
 
 2. How to FIX Geometry IN PLACE! 
+
+3. https://geojson.io/next/ 
 
 
 ogr2ogr                                    ← "I want to convert data"

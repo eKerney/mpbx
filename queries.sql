@@ -70,9 +70,21 @@ FROM
 --   public.boundaries.columns;
 \dpublic.boundaries \d SELECT
   (ST_Transform(
-    ST_GeomFromText('POLYGON((743238 2967416,743238 2967450,
+    ST_GeomFromText(
+      'POLYGON((743238 2967416,743238 2967450,
   743265 2967450,743265.625 2967416,743238 2967416))',
-    2249),
+      2249
+    ),
     4326
   )) AS wgs_geom;
+-- 
+-- topology 
+DROP TABLE IF EXISTS cleaned_topology;
+CREATE TABLE cleaned_topology AS SELECT
+  id,
+  name,
+  ST_CoverageClean(geom) AS geom-- Best modern function
+
+FROM
+  simplified;
 

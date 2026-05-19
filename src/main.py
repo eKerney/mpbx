@@ -91,9 +91,34 @@ class MyClass:
         self.nums: list[float] = nums
 
 
-class Hello:
-    def __init__(self) -> None:
-        pass
+# 1. Initialization
+hash_table = {}
 
-    def wellthen(self):
-        print("yo")
+# 2. Insertion / Update (O(1))
+hash_table["apple"] = 5
+hash_table["banana"] = 10
+
+# 3. Lookup (O(1))
+price = hash_table["apple"]  # Returns 5
+print(price)
+
+# 4. Deletion (O(1))
+# del hash_table["banana"]
+print(hash_table.get("orange", "Not Found"))
+
+arr = [5, 4, 7, 3, 8]
+target = 10
+
+def two_sum(arr: list[int], target: int) -> list[int]:
+    hashmap = {}
+    for i in range(len(arr)):
+        hashmap[arr[i]] = i
+
+    print(target, hashmap)
+    for i in range(len(arr)):
+        complement = target - arr[i]
+        if complement in hashmap and hashmap[complement] != i:
+            return [i, hashmap[complement]]
+    return []
+
+print(two_sum(arr=arr, target=target))

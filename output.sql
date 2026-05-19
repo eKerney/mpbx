@@ -1,5 +1,3 @@
- st_srid 
----------
-   27700
-(1 row)
-
+NOTICE:  table "simplified_clean" does not exist, skipping
+DROP TABLE
+SELECT 25508
